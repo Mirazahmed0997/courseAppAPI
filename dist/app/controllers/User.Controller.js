@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserZodSchema = exports.userRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const zod_1 = __importDefault(require("zod"));
-const URLSearchParams_d_1 = require("./../../../node_modules/@types/whatwg-url/lib/URLSearchParams.d");
+const User_model_1 = require("../models/User.model");
 exports.userRoutes = express_1.default.Router();
 exports.createUserZodSchema = zod_1.default.object({
     firstName: zod_1.default
@@ -35,7 +35,7 @@ exports.createUserZodSchema = zod_1.default.object({
 exports.userRoutes.post('/create', async (req, res) => {
     try {
         const body = await exports.createUserZodSchema.parseAsync(req.body);
-        const user = await (0, URLSearchParams_d_1.create)(body);
+        const user = await User_model_1.User.create(body);
         res.status(201).json({
             success: true,
             message: "User successfully created",

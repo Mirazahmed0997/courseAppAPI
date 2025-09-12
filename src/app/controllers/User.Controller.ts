@@ -2,6 +2,7 @@
 import express, { Request, Response } from 'express'
 import z from 'zod';
 import { create } from './../../../node_modules/@types/whatwg-url/lib/URLSearchParams.d';
+import { User } from '../models/User.model';
 
 export const userRoutes= express.Router()
 
@@ -40,7 +41,7 @@ userRoutes.post('/create',async(req: Request, res: Response)=>
 {
     try {
         const body= await createUserZodSchema.parseAsync(req.body)
-        const user = await create(body)
+        const user = await User.create(body)
 
         res.status(201).json({
             success: true,

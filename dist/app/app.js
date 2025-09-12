@@ -9,7 +9,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 const port = 5000;
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Task App!');
 });
 app.use('/user', User_Controller_1.userRoutes);
 // app.listen(port, () => {

@@ -53,3 +53,76 @@ userRoutes.post('/create',async(req: Request, res: Response)=>
         console.log(error)
     }
 })
+
+
+userRoutes.get('/', async(req: Request,res: Response)=>
+{
+  try {
+    const users= await User.find();
+    res.status(201).json({
+      status:true,
+      message: "All Users",
+      users
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+userRoutes.get('/:id', async(req:Request,res: Response)=>
+{
+  try {
+    const param= req.params.id
+    const user= await User.findById(param)
+
+    res.status(201).json({
+      status: true,
+      message: "Single User",
+      user
+    })
+
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+
+userRoutes.patch('/updated/:id', async (req:Request,res:Response)=>
+{
+  try {
+    const updatedBody= req.body;
+    const param= req.params.id;
+
+    const updatedUser= await User.findByIdAndUpdate(param,updatedBody,{new:true})
+
+    res.status(201).json({
+      status:true,
+      message:"User updated Successfully",
+      updatedUser
+    })
+
+  } catch (error) {
+    console.log(error)
+  }
+
+})
+
+
+userRoutes.delete('/delete/:id', async (req:Request,res:Response)=>
+{
+  try {
+    const param= req.params.id;
+
+    const updatedUser= await User.findByIdAndDelete(param)
+
+    res.status(201).json({
+      status:true,
+      message:"User Deleted Successfully",
+      updatedUser
+    })
+
+  } catch (error) {
+    console.log(error)
+  }
+
+})

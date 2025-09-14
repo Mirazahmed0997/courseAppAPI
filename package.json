@@ -16,6 +16,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "mogoose": "^0.0.1-security",
     "mongoose": "^8.18.1",
